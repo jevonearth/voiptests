@@ -28,11 +28,12 @@ start_mm() {
       rm ${MM_LOG}
     fi
     SIPLOG_LOGFILE_FILE="${MM_LOG}" SIPLOG_BEND="file" \
-     ${BUILDDIR}/dist/b2bua/sippy/b2bua_test.py --sip_address='*' \
-     --sip_port=5060 --foreground=on --acct_enable=off --auth_enable=off \
-     --static_route="localhost:5062;ash=SIP-Hello1%3A%20World%21;ash=SIP-Hello2%3A%20World%21" \
-     --b2bua_socket="${MM_SOCK}" --rtp_proxy_clients="${RTPP_SOCK_TEST}" \
-     --logfile="${MM_LOG}" &
+        b2bua_radius.py --sip_address='*' \
+        --sip_port=5060 --foreground=on --acct_enable=off --auth_enable=off \
+        --static_route="localhost:5062;ash=SIP-Hello1%3A%20World%21;ash=SIP-Hello2%3A%20World%21" \
+        --b2bua_socket="${MM_SOCK}" --rtp_proxy_clients="${RTPP_SOCK_TEST}" \
+        --hrtb_ival=120 --hrtb_retr_ival=120 \
+        --logfile="${MM_LOG}" &
     MM_PID=${!}
     ALICE_ARGS="-46"
     ;;

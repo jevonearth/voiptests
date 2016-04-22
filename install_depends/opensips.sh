@@ -29,9 +29,9 @@ then
 fi
 if [ "${MM_TYPE}" = "b2bua" ]
 then
-  git clone -b "${MM_BRANCH}" git://github.com/sippy/b2bua.git
+  pip install git+https://github.com/sippy/b2bua@${MM_BRANCH}
 else
-  git clone git://github.com/sippy/b2bua.git
+  pip install git+https://github.com/sippy/b2bua
 fi
 git clone -b "${RTPP_BRANCH}" git://github.com/sippy/rtpproxy.git
 if [ "${MM_TYPE}" = "kamailio" ]
@@ -58,7 +58,3 @@ fi
 cd rtpproxy
 ./configure
 ${MAKE_CMD} all
-( cat ${BASEDIR}/install_depends/b2bua_radius.py.fix; \
-  grep -v '^from sippy.Rtp_proxy_client import Rtp_proxy_client' ${BASEDIR}/dist/b2bua/sippy/b2bua_radius.py ) | \
-  sed "s|%%SIPPY_ROOT%%|${BASEDIR}/dist/b2bua|" > ${BASEDIR}/dist/b2bua/sippy/b2bua_test.py
-chmod 755 ${BASEDIR}/dist/b2bua/sippy/b2bua_test.py
