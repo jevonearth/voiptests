@@ -29,9 +29,11 @@ then
 fi
 if [ "${MM_TYPE}" = "b2bua" ]
 then
-  pip install git+https://github.com/sippy/b2bua@${MM_BRANCH}
+  git clone -b "${MM_BRANCH}" git://github.com/sippy/b2bua.git
+  cd b2bua ; python setup.py develop
 else
-  pip install git+https://github.com/sippy/b2bua
+  git clone git://github.com/sippy/b2bua.git
+  cd b2bua ; python setup.py develop
 fi
 git clone -b "${RTPP_BRANCH}" git://github.com/sippy/rtpproxy.git
 if [ "${MM_TYPE}" = "kamailio" ]
